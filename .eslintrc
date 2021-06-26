@@ -29,5 +29,6 @@
     "no-param-reassign": ["error", {
       "props": false
     }]
-  }
+  },
+  "ignorePatterns": ["*config.js"]
 }

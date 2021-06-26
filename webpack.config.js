@@ -8,7 +8,6 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const devServer = (isDev) => !isDev ? {} : {
   devServer: {
     open: true,
-    hot: true,
     port: 8080,
     contentBase: path.join(__dirname, 'public'),
   },
@@ -55,11 +54,12 @@ module.exports = ({ development }) => ({
   plugins: [
     ...esLintPlugin(development),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new HtmlWebpackPlugin({ title: 'The Cantina' }),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
     new CopyPlugin({
-      patterns: [
-        { from: 'public' },
-      ],
+      patterns: [{
+        from: 'public',
+        noErrorOnMissing: true,
+      }],
     }),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
   ],
